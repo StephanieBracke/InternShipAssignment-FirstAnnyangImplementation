@@ -10,7 +10,9 @@ type
   TForm1 = class(TWebForm)
     txtMordu: TWebEdit;
     WebButton1: TWebButton;
+    TalkToMordu: TWebButton;
     procedure WebButton1Click(Sender: TObject);
+    procedure TalkToMorduClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -19,23 +21,44 @@ type
 
 var
   Form1: TForm1;
+  repeatSentence : String;
 
 implementation
 
 {$R *.dfm}
 
-procedure TForm1.WebButton1Click(Sender: TObject);
-var sentence : String;
+procedure TForm1.TalkToMorduClick(Sender: TObject);
 begin
-sentence := '';
 
-Asm 
+asm 
+
+if (annyang) 
+    {
+        var commands = {
+          'repeat *variable': repeatUser
+        };
+
+      //Repeat what the user says
+            function repeatUser(userSentence){
+              $mod.repeatSentence = userSentence;
+            }
+
+      //Add commands
+            annyang.addCommands(commands);
+
+      //Start Listening
+            annyang.start()
+    }
+end;
 
 end;
 
-if sentence <> String.Empty then
+procedure TForm1.WebButton1Click(Sender: TObject);
+begin
+
+if repeatSentence <> String.Empty then
   begin
-    txtMordu.Text := sentence;
+    txtMordu.Text := repeatSentence;
   end
 
 else 
@@ -43,4 +66,4 @@ else
 
 end;
 
-end.
+end. 
