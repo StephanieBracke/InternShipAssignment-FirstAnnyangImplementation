@@ -44333,25 +44333,57 @@ rtl.module("Unit1",["System","SysUtils","Classes","JS","Web","WEBLib.Graphics","
       pas["WEBLib.Forms"].TForm.$init.call(this);
       this.txtMordu = null;
       this.WebButton1 = null;
+      this.TalkToMordu = null;
     };
     this.$final = function () {
       this.txtMordu = undefined;
       this.WebButton1 = undefined;
+      this.TalkToMordu = undefined;
       pas["WEBLib.Forms"].TForm.$final.call(this);
     };
     this.WebButton1Click = function (Sender) {
-      var sentence = "";
-      sentence = "";
-      if (sentence !== pas.SysUtils.TStringHelper.Empty) {
-        this.txtMordu.SetText(sentence);
+      if ($mod.repeatSentence !== pas.SysUtils.TStringHelper.Empty) {
+        this.txtMordu.SetText($mod.repeatSentence);
       } else pas["WEBLib.Dialogs"].ShowMessage("You didnt talk to mordu yet");
+    };
+    this.TalkToMorduClick = function (Sender) {
+      var StopTalking = "";
+      this.TalkToMordu.SetCaption("Mordu is listening");
+      if (annyang) 
+          {
+      var messages = ['🔊 I am the Lieutenant of Barad-dûr', '🔊 I am the Messenger of Mordor', '🔊 I am the Emissary of the Dark Lord', '🔊 I am the Ambassador of Sauron'];
+      
+              var commands = {
+                'Who are you': introduction,
+                'repeat *variable': repeatUser
+              };
+      
+            //Mordu will introduce himself
+                  function introduction(){
+                    var randomIndex = Math.round(Math.random() * messages.length);
+                      alert(messages[randomIndex]);
+                  }
+      
+            //Repeat what the user says
+                  function repeatUser(userSentence){
+                    $mod.repeatSentence = userSentence;
+                  }
+      
+            //Add commands
+                  annyang.addCommands(commands);
+      
+            //Start Listening
+                  annyang.start();
+          };
     };
     this.LoadDFMValues = function () {
       pas["WEBLib.Forms"].TCustomForm.LoadDFMValues.call(this);
       this.txtMordu = pas["WEBLib.StdCtrls"].TEdit.$create("Create$1",[this]);
       this.WebButton1 = pas["WEBLib.StdCtrls"].TButton.$create("Create$1",[this]);
+      this.TalkToMordu = pas["WEBLib.StdCtrls"].TButton.$create("Create$1",[this]);
       this.txtMordu.BeforeLoadDFMValues();
       this.WebButton1.BeforeLoadDFMValues();
+      this.TalkToMordu.BeforeLoadDFMValues();
       try {
         this.SetName("Form1");
         this.SetColor(16777215);
@@ -44365,6 +44397,7 @@ rtl.module("Unit1",["System","SysUtils","Classes","JS","Web","WEBLib.Graphics","
         this.SetFormStyle(pas["WEBLib.Forms"].TFormStyle.fsNormal);
         this.SetHeight(480);
         this.SetLeft(0);
+        this.SetParentFont(false);
         this.SetTabOrder(0);
         this.SetTop(0);
         this.SetWidth(640);
@@ -44380,14 +44413,15 @@ rtl.module("Unit1",["System","SysUtils","Classes","JS","Web","WEBLib.Graphics","
         this.txtMordu.FFont.SetStyle({});
         this.txtMordu.SetHeight(25);
         this.txtMordu.SetHideSelection(false);
-        this.txtMordu.SetLeft(270);
+        this.txtMordu.SetLeft(262);
+        this.txtMordu.SetParentFont(false);
         this.txtMordu.SetShowFocus(true);
         this.txtMordu.SetTabOrder(0);
         this.txtMordu.SetTop(227);
         this.txtMordu.SetWidth(100);
         this.WebButton1.SetParentComponent(this);
         this.WebButton1.SetName("WebButton1");
-        this.WebButton1.SetCaption("btnClick");
+        this.WebButton1.SetCaption("Show me what I said !");
         this.WebButton1.SetColor(-1);
         this.WebButton1.SetDefault(false);
         this.WebButton1.FFont.FCharset = 0;
@@ -44396,25 +44430,49 @@ rtl.module("Unit1",["System","SysUtils","Classes","JS","Web","WEBLib.Graphics","
         this.WebButton1.FFont.SetName("Arial");
         this.WebButton1.FFont.SetSize(8);
         this.WebButton1.FFont.SetStyle({});
-        this.WebButton1.SetHeight(25);
-        this.WebButton1.SetLeft(270);
+        this.WebButton1.SetHeight(32);
+        this.WebButton1.SetLeft(158);
         this.SetEvent$1(this.WebButton1,this,"OnClick","WebButton1Click");
+        this.WebButton1.SetParentFont(false);
         this.WebButton1.SetRole("button");
         this.WebButton1.SetTabOrder(0);
-        this.WebButton1.SetTop(299);
-        this.WebButton1.SetWidth(100);
+        this.WebButton1.SetTop(298);
+        this.WebButton1.SetWidth(104);
+        this.TalkToMordu.SetParentComponent(this);
+        this.TalkToMordu.SetName("TalkToMordu");
+        this.TalkToMordu.SetCaption("TalkToMordu");
+        this.TalkToMordu.SetColor(-1);
+        this.TalkToMordu.SetDefault(false);
+        this.TalkToMordu.FFont.FCharset = 0;
+        this.TalkToMordu.FFont.SetColor(0);
+        this.TalkToMordu.FFont.SetHeight(0);
+        this.TalkToMordu.FFont.SetName("Arial");
+        this.TalkToMordu.FFont.SetSize(8);
+        this.TalkToMordu.FFont.SetStyle({});
+        this.TalkToMordu.SetHeight(32);
+        this.TalkToMordu.SetLeft(366);
+        this.SetEvent$1(this.TalkToMordu,this,"OnClick","TalkToMorduClick");
+        this.TalkToMordu.SetParentFont(false);
+        this.TalkToMordu.SetRole("button");
+        this.TalkToMordu.SetTabOrder(0);
+        this.TalkToMordu.SetTop(298);
+        this.TalkToMordu.SetWidth(104);
       } finally {
         this.txtMordu.AfterLoadDFMValues();
         this.WebButton1.AfterLoadDFMValues();
+        this.TalkToMordu.AfterLoadDFMValues();
       };
     };
     rtl.addIntf(this,pas.System.IUnknown);
     var $r = this.$rtti;
     $r.addField("txtMordu",pas["WEBLib.StdCtrls"].$rtti["TEdit"]);
     $r.addField("WebButton1",pas["WEBLib.StdCtrls"].$rtti["TButton"]);
+    $r.addField("TalkToMordu",pas["WEBLib.StdCtrls"].$rtti["TButton"]);
     $r.addMethod("WebButton1Click",0,[["Sender",pas.System.$rtti["TObject"]]]);
+    $r.addMethod("TalkToMorduClick",0,[["Sender",pas.System.$rtti["TObject"]]]);
   });
   this.Form1 = null;
+  this.repeatSentence = "";
 });
 rtl.module("program",["System","WEBLib.Forms","WEBLib.Forms","Unit1"],function () {
   "use strict";

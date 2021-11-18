@@ -10,6 +10,7 @@ object Form1: TForm1
   FormStyle = fsNormal
   Height = 480
   Left = 0
+  ParentFont = False
   TabOrder = 0
   Top = 0
   Width = 640
@@ -24,14 +25,15 @@ object Form1: TForm1
     Font.Style = []
     Height = 25
     HideSelection = False
-    Left = 270
+    Left = 262
+    ParentFont = False
     ShowFocus = True
     TabOrder = 0
     Top = 227
     Width = 100
   end
   object WebButton1: TWebButton
-    Caption = 'btnClick'
+    Caption = 'Show me what I said !'
     Color = clNone
     Default = False
     Font.Charset = ANSI_CHARSET
@@ -40,12 +42,32 @@ object Form1: TForm1
     Font.Name = 'Arial'
     Font.Size = 8
     Font.Style = []
-    Height = 25
-    Left = 270
+    Height = 32
+    Left = 158
     OnClick = WebButton1Click
+    ParentFont = False
     Role = 'button'
     TabOrder = 0
-    Top = 299
-    Width = 100
+    Top = 298
+    Width = 104
+  end
+  object TalkToMordu: TWebButton
+    Caption = 'TalkToMordu'
+    Color = clNone
+    Default = False
+    Font.Charset = ANSI_CHARSET
+    Font.Color = clBlack
+    Font.Height = 0
+    Font.Name = 'Arial'
+    Font.Size = 8
+    Font.Style = []
+    Height = 32
+    Left = 366
+    OnClick = TalkToMorduClick
+    ParentFont = False
+    Role = 'button'
+    TabOrder = 0
+    Top = 298
+    Width = 104
   end
 end

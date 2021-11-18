@@ -27,16 +27,31 @@ implementation
 
 {$R *.dfm}
 
+
 procedure TForm1.TalkToMorduClick(Sender: TObject);
+var
+StopTalking: String;
 begin
 
+TalkToMordu.Caption := 'Mordu is listening';
+
+//Asm Start
 asm 
 
 if (annyang) 
     {
+var messages = ['🔊 I am the Lieutenant of Barad-dûr', '🔊 I am the Messenger of Mordor', '🔊 I am the Emissary of the Dark Lord', '🔊 I am the Ambassador of Sauron'];
+
         var commands = {
+          'Who are you': introduction,
           'repeat *variable': repeatUser
         };
+
+      //Mordu will introduce himself
+            function introduction(){
+              var randomIndex = Math.round(Math.random() * messages.length);
+                alert(messages[randomIndex]);
+            }
 
       //Repeat what the user says
             function repeatUser(userSentence){
@@ -47,8 +62,9 @@ if (annyang)
             annyang.addCommands(commands);
 
       //Start Listening
-            annyang.start()
+            annyang.start();
     }
+
 end;
 
 end;
@@ -61,9 +77,9 @@ if repeatSentence <> String.Empty then
     txtMordu.Text := repeatSentence;
   end
 
-else 
+else
   ShowMessage('You didnt talk to mordu yet');
 
 end;
 
-end. 
+end.  
