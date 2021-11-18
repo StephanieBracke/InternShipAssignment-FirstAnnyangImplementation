@@ -10,9 +10,9 @@ type
   TForm1 = class(TWebForm)
     txtMordu: TWebEdit;
     WebButton1: TWebButton;
-    TalkToMordu: TWebButton;
+    IsListening: TWebCheckBox;
     procedure WebButton1Click(Sender: TObject);
-    procedure TalkToMorduClick(Sender: TObject);
+    procedure IsListeningClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -27,33 +27,30 @@ implementation
 
 {$R *.dfm}
 
-
-procedure TForm1.TalkToMorduClick(Sender: TObject);
-var
-StopTalking: String;
+procedure TForm1.IsListeningClick(Sender: TObject);
 begin
 
-TalkToMordu.Caption := 'Mordu is listening';
+if(IsListening.Checked) then
+begin
+IsListening.Caption := 'Mordu is listening';
+  //Asm Start
+    asm 
+      if (annyang) 
+        {
+          var messages = ['🔊 I am the Lieutenant of Barad-dûr', '🔊 I am the Messenger of Mordor', '🔊 I am the Emissary of the Dark Lord', '🔊 I am the Ambassador of Sauron'];
 
-//Asm Start
-asm 
+          var commands = {
+            'Who are you': introduction,
+            'repeat *variable': repeatUser,
+          };
 
-if (annyang) 
-    {
-var messages = ['🔊 I am the Lieutenant of Barad-dûr', '🔊 I am the Messenger of Mordor', '🔊 I am the Emissary of the Dark Lord', '🔊 I am the Ambassador of Sauron'];
-
-        var commands = {
-          'Who are you': introduction,
-          'repeat *variable': repeatUser
-        };
-
-      //Mordu will introduce himself
+         //Mordu will introduce himself
             function introduction(){
               var randomIndex = Math.round(Math.random() * messages.length);
                 alert(messages[randomIndex]);
             }
 
-      //Repeat what the user says
+          //Repeat what the user says
             function repeatUser(userSentence){
               $mod.repeatSentence = userSentence;
             }
@@ -64,9 +61,14 @@ var messages = ['🔊 I am the Lieutenant of Barad-dûr', '🔊 I am the Messeng
       //Start Listening
             annyang.start();
     }
-
+end; 
+end 
+else
+asm 
+if (annyang){
+  annyang.abort()
+}
 end;
-
 end;
 
 procedure TForm1.WebButton1Click(Sender: TObject);
@@ -78,8 +80,8 @@ if repeatSentence <> String.Empty then
   end
 
 else
-  ShowMessage('You didnt talk to mordu yet');
+  ShowMessage('You didn''t talk to Mordu yet');
 
 end;
 
-end.  
+end.   

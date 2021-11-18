@@ -43,7 +43,7 @@ object Form1: TForm1
     Font.Size = 8
     Font.Style = []
     Height = 32
-    Left = 158
+    Left = 262
     OnClick = WebButton1Click
     ParentFont = False
     Role = 'button'
@@ -51,23 +51,22 @@ object Form1: TForm1
     Top = 298
     Width = 104
   end
-  object TalkToMordu: TWebButton
-    Caption = 'TalkToMordu'
-    Color = clNone
-    Default = False
+  object IsListening: TWebCheckBox
+    Caption = 'IsListening'
     Font.Charset = ANSI_CHARSET
     Font.Color = clBlack
     Font.Height = 0
     Font.Name = 'Arial'
     Font.Size = 8
     Font.Style = []
-    Height = 32
-    Left = 366
-    OnClick = TalkToMorduClick
+    Height = 25
+    Left = 262
+    OnClick = IsListeningClick
     ParentFont = False
-    Role = 'button'
+    ShowFocus = True
+    State = cbUnchecked
     TabOrder = 0
-    Top = 298
-    Width = 104
+    Top = 179
+    Width = 100
   end
 end

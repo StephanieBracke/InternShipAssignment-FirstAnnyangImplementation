@@ -44333,57 +44333,60 @@ rtl.module("Unit1",["System","SysUtils","Classes","JS","Web","WEBLib.Graphics","
       pas["WEBLib.Forms"].TForm.$init.call(this);
       this.txtMordu = null;
       this.WebButton1 = null;
-      this.TalkToMordu = null;
+      this.IsListening = null;
     };
     this.$final = function () {
       this.txtMordu = undefined;
       this.WebButton1 = undefined;
-      this.TalkToMordu = undefined;
+      this.IsListening = undefined;
       pas["WEBLib.Forms"].TForm.$final.call(this);
     };
     this.WebButton1Click = function (Sender) {
       if ($mod.repeatSentence !== pas.SysUtils.TStringHelper.Empty) {
         this.txtMordu.SetText($mod.repeatSentence);
-      } else pas["WEBLib.Dialogs"].ShowMessage("You didnt talk to mordu yet");
+      } else pas["WEBLib.Dialogs"].ShowMessage("You didn't talk to Mordu yet");
     };
-    this.TalkToMorduClick = function (Sender) {
-      var StopTalking = "";
-      this.TalkToMordu.SetCaption("Mordu is listening");
-      if (annyang) 
-          {
-      var messages = ['🔊 I am the Lieutenant of Barad-dûr', '🔊 I am the Messenger of Mordor', '🔊 I am the Emissary of the Dark Lord', '🔊 I am the Ambassador of Sauron'];
-      
-              var commands = {
-                'Who are you': introduction,
-                'repeat *variable': repeatUser
-              };
-      
-            //Mordu will introduce himself
-                  function introduction(){
-                    var randomIndex = Math.round(Math.random() * messages.length);
-                      alert(messages[randomIndex]);
-                  }
-      
-            //Repeat what the user says
-                  function repeatUser(userSentence){
-                    $mod.repeatSentence = userSentence;
-                  }
-      
-            //Add commands
-                  annyang.addCommands(commands);
-      
-            //Start Listening
-                  annyang.start();
-          };
+    this.IsListeningClick = function (Sender) {
+      if (this.IsListening.GetChecked()) {
+        this.IsListening.SetCaption("Mordu is listening");
+        if (annyang) 
+                {
+                  var messages = ['🔊 I am the Lieutenant of Barad-dûr', '🔊 I am the Messenger of Mordor', '🔊 I am the Emissary of the Dark Lord', '🔊 I am the Ambassador of Sauron'];
+        
+                  var commands = {
+                    'Who are you': introduction,
+                    'repeat *variable': repeatUser,
+                  };
+        
+                 //Mordu will introduce himself
+                    function introduction(){
+                      var randomIndex = Math.round(Math.random() * messages.length);
+                        alert(messages[randomIndex]);
+                    }
+        
+                  //Repeat what the user says
+                    function repeatUser(userSentence){
+                      $mod.repeatSentence = userSentence;
+                    }
+        
+              //Add commands
+                    annyang.addCommands(commands);
+        
+              //Start Listening
+                    annyang.start();
+            };
+      } else if (annyang){
+        annyang.abort()
+      };
     };
     this.LoadDFMValues = function () {
       pas["WEBLib.Forms"].TCustomForm.LoadDFMValues.call(this);
       this.txtMordu = pas["WEBLib.StdCtrls"].TEdit.$create("Create$1",[this]);
       this.WebButton1 = pas["WEBLib.StdCtrls"].TButton.$create("Create$1",[this]);
-      this.TalkToMordu = pas["WEBLib.StdCtrls"].TButton.$create("Create$1",[this]);
+      this.IsListening = pas["WEBLib.StdCtrls"].TCheckBox.$create("Create$1",[this]);
       this.txtMordu.BeforeLoadDFMValues();
       this.WebButton1.BeforeLoadDFMValues();
-      this.TalkToMordu.BeforeLoadDFMValues();
+      this.IsListening.BeforeLoadDFMValues();
       try {
         this.SetName("Form1");
         this.SetColor(16777215);
@@ -44431,45 +44434,44 @@ rtl.module("Unit1",["System","SysUtils","Classes","JS","Web","WEBLib.Graphics","
         this.WebButton1.FFont.SetSize(8);
         this.WebButton1.FFont.SetStyle({});
         this.WebButton1.SetHeight(32);
-        this.WebButton1.SetLeft(158);
+        this.WebButton1.SetLeft(262);
         this.SetEvent$1(this.WebButton1,this,"OnClick","WebButton1Click");
         this.WebButton1.SetParentFont(false);
         this.WebButton1.SetRole("button");
         this.WebButton1.SetTabOrder(0);
         this.WebButton1.SetTop(298);
         this.WebButton1.SetWidth(104);
-        this.TalkToMordu.SetParentComponent(this);
-        this.TalkToMordu.SetName("TalkToMordu");
-        this.TalkToMordu.SetCaption("TalkToMordu");
-        this.TalkToMordu.SetColor(-1);
-        this.TalkToMordu.SetDefault(false);
-        this.TalkToMordu.FFont.FCharset = 0;
-        this.TalkToMordu.FFont.SetColor(0);
-        this.TalkToMordu.FFont.SetHeight(0);
-        this.TalkToMordu.FFont.SetName("Arial");
-        this.TalkToMordu.FFont.SetSize(8);
-        this.TalkToMordu.FFont.SetStyle({});
-        this.TalkToMordu.SetHeight(32);
-        this.TalkToMordu.SetLeft(366);
-        this.SetEvent$1(this.TalkToMordu,this,"OnClick","TalkToMorduClick");
-        this.TalkToMordu.SetParentFont(false);
-        this.TalkToMordu.SetRole("button");
-        this.TalkToMordu.SetTabOrder(0);
-        this.TalkToMordu.SetTop(298);
-        this.TalkToMordu.SetWidth(104);
+        this.IsListening.SetParentComponent(this);
+        this.IsListening.SetName("IsListening");
+        this.IsListening.SetCaption("IsListening");
+        this.IsListening.FFont.FCharset = 0;
+        this.IsListening.FFont.SetColor(0);
+        this.IsListening.FFont.SetHeight(0);
+        this.IsListening.FFont.SetName("Arial");
+        this.IsListening.FFont.SetSize(8);
+        this.IsListening.FFont.SetStyle({});
+        this.IsListening.SetHeight(25);
+        this.IsListening.SetLeft(262);
+        this.SetEvent$1(this.IsListening,this,"OnClick","IsListeningClick");
+        this.IsListening.SetParentFont(false);
+        this.IsListening.SetShowFocus(true);
+        this.IsListening.SetState(pas["WEBLib.StdCtrls"].TCheckBoxState.cbUnchecked);
+        this.IsListening.SetTabOrder(0);
+        this.IsListening.SetTop(179);
+        this.IsListening.SetWidth(100);
       } finally {
         this.txtMordu.AfterLoadDFMValues();
         this.WebButton1.AfterLoadDFMValues();
-        this.TalkToMordu.AfterLoadDFMValues();
+        this.IsListening.AfterLoadDFMValues();
       };
     };
     rtl.addIntf(this,pas.System.IUnknown);
     var $r = this.$rtti;
     $r.addField("txtMordu",pas["WEBLib.StdCtrls"].$rtti["TEdit"]);
     $r.addField("WebButton1",pas["WEBLib.StdCtrls"].$rtti["TButton"]);
-    $r.addField("TalkToMordu",pas["WEBLib.StdCtrls"].$rtti["TButton"]);
+    $r.addField("IsListening",pas["WEBLib.StdCtrls"].$rtti["TCheckBox"]);
     $r.addMethod("WebButton1Click",0,[["Sender",pas.System.$rtti["TObject"]]]);
-    $r.addMethod("TalkToMorduClick",0,[["Sender",pas.System.$rtti["TObject"]]]);
+    $r.addMethod("IsListeningClick",0,[["Sender",pas.System.$rtti["TObject"]]]);
   });
   this.Form1 = null;
   this.repeatSentence = "";
