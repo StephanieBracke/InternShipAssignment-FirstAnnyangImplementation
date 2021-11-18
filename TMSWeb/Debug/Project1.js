@@ -44332,17 +44332,18 @@ rtl.module("Unit1",["System","SysUtils","Classes","JS","Web","WEBLib.Graphics","
     this.$init = function () {
       pas["WEBLib.Forms"].TForm.$init.call(this);
       this.txtMordu = null;
-      this.WebButton1 = null;
       this.IsListening = null;
+      this.btnClick = null;
     };
     this.$final = function () {
       this.txtMordu = undefined;
-      this.WebButton1 = undefined;
       this.IsListening = undefined;
+      this.btnClick = undefined;
       pas["WEBLib.Forms"].TForm.$final.call(this);
     };
-    this.WebButton1Click = function (Sender) {
+    this.btnClickClick = function (Sender) {
       if ($mod.repeatSentence !== pas.SysUtils.TStringHelper.Empty) {
+        this.btnClick.SetCaption("This is what you told Mordu!");
         this.txtMordu.SetText($mod.repeatSentence);
       } else pas["WEBLib.Dialogs"].ShowMessage("You didn't talk to Mordu yet");
     };
@@ -44383,11 +44384,11 @@ rtl.module("Unit1",["System","SysUtils","Classes","JS","Web","WEBLib.Graphics","
     this.LoadDFMValues = function () {
       pas["WEBLib.Forms"].TCustomForm.LoadDFMValues.call(this);
       this.txtMordu = pas["WEBLib.StdCtrls"].TEdit.$create("Create$1",[this]);
-      this.WebButton1 = pas["WEBLib.StdCtrls"].TButton.$create("Create$1",[this]);
       this.IsListening = pas["WEBLib.StdCtrls"].TCheckBox.$create("Create$1",[this]);
+      this.btnClick = pas["WEBLib.StdCtrls"].TButton.$create("Create$1",[this]);
       this.txtMordu.BeforeLoadDFMValues();
-      this.WebButton1.BeforeLoadDFMValues();
       this.IsListening.BeforeLoadDFMValues();
+      this.btnClick.BeforeLoadDFMValues();
       try {
         this.SetName("Form1");
         this.SetColor(16777215);
@@ -44423,25 +44424,6 @@ rtl.module("Unit1",["System","SysUtils","Classes","JS","Web","WEBLib.Graphics","
         this.txtMordu.SetTabOrder(0);
         this.txtMordu.SetTop(227);
         this.txtMordu.SetWidth(100);
-        this.WebButton1.SetParentComponent(this);
-        this.WebButton1.SetName("WebButton1");
-        this.WebButton1.SetCaption("Show me what I said !");
-        this.WebButton1.SetColor(-1);
-        this.WebButton1.SetDefault(false);
-        this.WebButton1.FFont.FCharset = 0;
-        this.WebButton1.FFont.SetColor(0);
-        this.WebButton1.FFont.SetHeight(0);
-        this.WebButton1.FFont.SetName("Arial");
-        this.WebButton1.FFont.SetSize(8);
-        this.WebButton1.FFont.SetStyle({});
-        this.WebButton1.SetHeight(32);
-        this.WebButton1.SetLeft(262);
-        this.SetEvent$1(this.WebButton1,this,"OnClick","WebButton1Click");
-        this.WebButton1.SetParentFont(false);
-        this.WebButton1.SetRole("button");
-        this.WebButton1.SetTabOrder(0);
-        this.WebButton1.SetTop(298);
-        this.WebButton1.SetWidth(104);
         this.IsListening.SetParentComponent(this);
         this.IsListening.SetName("IsListening");
         this.IsListening.SetCaption("Share something with Mordu");
@@ -44460,18 +44442,36 @@ rtl.module("Unit1",["System","SysUtils","Classes","JS","Web","WEBLib.Graphics","
         this.IsListening.SetTabOrder(0);
         this.IsListening.SetTop(179);
         this.IsListening.SetWidth(160);
+        this.btnClick.SetParentComponent(this);
+        this.btnClick.SetName("btnClick");
+        this.btnClick.SetCaption("Show me what I told Mordu");
+        this.btnClick.SetColor(-1);
+        this.btnClick.SetDefault(false);
+        this.btnClick.FFont.FCharset = 0;
+        this.btnClick.FFont.SetColor(0);
+        this.btnClick.FFont.SetHeight(0);
+        this.btnClick.FFont.SetName("Arial");
+        this.btnClick.FFont.SetSize(8);
+        this.btnClick.FFont.SetStyle({});
+        this.btnClick.SetHeight(40);
+        this.btnClick.SetLeft(262);
+        this.SetEvent$1(this.btnClick,this,"OnClick","btnClickClick");
+        this.btnClick.SetRole("button");
+        this.btnClick.SetTabOrder(0);
+        this.btnClick.SetTop(288);
+        this.btnClick.SetWidth(100);
       } finally {
         this.txtMordu.AfterLoadDFMValues();
-        this.WebButton1.AfterLoadDFMValues();
         this.IsListening.AfterLoadDFMValues();
+        this.btnClick.AfterLoadDFMValues();
       };
     };
     rtl.addIntf(this,pas.System.IUnknown);
     var $r = this.$rtti;
     $r.addField("txtMordu",pas["WEBLib.StdCtrls"].$rtti["TEdit"]);
-    $r.addField("WebButton1",pas["WEBLib.StdCtrls"].$rtti["TButton"]);
     $r.addField("IsListening",pas["WEBLib.StdCtrls"].$rtti["TCheckBox"]);
-    $r.addMethod("WebButton1Click",0,[["Sender",pas.System.$rtti["TObject"]]]);
+    $r.addField("btnClick",pas["WEBLib.StdCtrls"].$rtti["TButton"]);
+    $r.addMethod("btnClickClick",0,[["Sender",pas.System.$rtti["TObject"]]]);
     $r.addMethod("IsListeningClick",0,[["Sender",pas.System.$rtti["TObject"]]]);
   });
   this.Form1 = null;

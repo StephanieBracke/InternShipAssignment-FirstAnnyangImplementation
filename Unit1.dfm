@@ -32,25 +32,6 @@ object Form1: TForm1
     Top = 227
     Width = 100
   end
-  object WebButton1: TWebButton
-    Caption = 'Show me what I said !'
-    Color = clNone
-    Default = False
-    Font.Charset = ANSI_CHARSET
-    Font.Color = clBlack
-    Font.Height = 0
-    Font.Name = 'Arial'
-    Font.Size = 8
-    Font.Style = []
-    Height = 32
-    Left = 262
-    OnClick = WebButton1Click
-    ParentFont = False
-    Role = 'button'
-    TabOrder = 0
-    Top = 298
-    Width = 104
-  end
   object IsListening: TWebCheckBox
     Caption = 'Share something with Mordu'
     Font.Charset = ANSI_CHARSET
@@ -68,5 +49,23 @@ object Form1: TForm1
     TabOrder = 0
     Top = 179
     Width = 160
+  end
+  object btnClick: TWebButton
+    Caption = 'Show me what I told Mordu'
+    Color = clNone
+    Default = False
+    Font.Charset = ANSI_CHARSET
+    Font.Color = clBlack
+    Font.Height = 0
+    Font.Name = 'Arial'
+    Font.Size = 8
+    Font.Style = []
+    Height = 40
+    Left = 262
+    OnClick = btnClickClick
+    Role = 'button'
+    TabOrder = 0
+    Top = 288
+    Width = 100
   end
 end

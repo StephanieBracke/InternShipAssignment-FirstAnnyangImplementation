@@ -9,10 +9,11 @@ uses
 type
   TForm1 = class(TWebForm)
     txtMordu: TWebEdit;
-    WebButton1: TWebButton;
     IsListening: TWebCheckBox;
-    procedure WebButton1Click(Sender: TObject);
+    btnClick: TWebButton;
+    procedure btnClickClick(Sender: TObject);
     procedure IsListeningClick(Sender: TObject);
+    
   private
     { Private declarations }
   public
@@ -73,11 +74,12 @@ end
 
 end;
 
-procedure TForm1.WebButton1Click(Sender: TObject);
+procedure TForm1.btnClickClick(Sender: TObject);
 begin
 
 if repeatSentence <> String.Empty then
   begin
+    btnClick.Caption := 'This is what you told Mordu!';
     txtMordu.Text := repeatSentence;
   end
 
@@ -86,4 +88,4 @@ else
 
 end;
 
-end.    
+end.     
