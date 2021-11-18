@@ -52,14 +52,14 @@ object Form1: TForm1
     Width = 104
   end
   object IsListening: TWebCheckBox
-    Caption = 'IsListening'
+    Caption = 'Share something with Mordu'
     Font.Charset = ANSI_CHARSET
     Font.Color = clBlack
     Font.Height = 0
     Font.Name = 'Arial'
     Font.Size = 8
     Font.Style = []
-    Height = 25
+    Height = 24
     Left = 262
     OnClick = IsListeningClick
     ParentFont = False
@@ -67,6 +67,6 @@ object Form1: TForm1
     State = cbUnchecked
     TabOrder = 0
     Top = 179
-    Width = 100
+    Width = 160
   end
 end

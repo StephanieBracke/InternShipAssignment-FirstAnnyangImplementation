@@ -44347,36 +44347,37 @@ rtl.module("Unit1",["System","SysUtils","Classes","JS","Web","WEBLib.Graphics","
       } else pas["WEBLib.Dialogs"].ShowMessage("You didn't talk to Mordu yet");
     };
     this.IsListeningClick = function (Sender) {
-      if (this.IsListening.GetChecked()) {
-        this.IsListening.SetCaption("Mordu is listening");
-        if (annyang) 
-                {
+      this.IsListening.SetCaption("Mordu is listening");
+      if (annyang){
                   var messages = ['🔊 I am the Lieutenant of Barad-dûr', '🔊 I am the Messenger of Mordor', '🔊 I am the Emissary of the Dark Lord', '🔊 I am the Ambassador of Sauron'];
-        
+      
                   var commands = {
                     'Who are you': introduction,
                     'repeat *variable': repeatUser,
                   };
-        
-                 //Mordu will introduce himself
+      
+                //Mordu will introduce himself
                     function introduction(){
                       var randomIndex = Math.round(Math.random() * messages.length);
                         alert(messages[randomIndex]);
                     }
-        
-                  //Repeat what the user says
+      
+                //Repeat what the user says
                     function repeatUser(userSentence){
                       $mod.repeatSentence = userSentence;
                     }
-        
-              //Add commands
+      
+                //Add commands
                     annyang.addCommands(commands);
-        
-              //Start Listening
+      
+                //Start Listening
                     annyang.start();
-            };
-      } else if (annyang){
-        annyang.abort()
+                };
+      if (this.IsListening.GetChecked() === false) {
+        this.IsListening.SetCaption("Mordu is not listening");
+        //Stop Listening 
+        if (annyang){
+        annyang.abort();};
       };
     };
     this.LoadDFMValues = function () {
@@ -44443,14 +44444,14 @@ rtl.module("Unit1",["System","SysUtils","Classes","JS","Web","WEBLib.Graphics","
         this.WebButton1.SetWidth(104);
         this.IsListening.SetParentComponent(this);
         this.IsListening.SetName("IsListening");
-        this.IsListening.SetCaption("IsListening");
+        this.IsListening.SetCaption("Share something with Mordu");
         this.IsListening.FFont.FCharset = 0;
         this.IsListening.FFont.SetColor(0);
         this.IsListening.FFont.SetHeight(0);
         this.IsListening.FFont.SetName("Arial");
         this.IsListening.FFont.SetSize(8);
         this.IsListening.FFont.SetStyle({});
-        this.IsListening.SetHeight(25);
+        this.IsListening.SetHeight(24);
         this.IsListening.SetLeft(262);
         this.SetEvent$1(this.IsListening,this,"OnClick","IsListeningClick");
         this.IsListening.SetParentFont(false);
@@ -44458,7 +44459,7 @@ rtl.module("Unit1",["System","SysUtils","Classes","JS","Web","WEBLib.Graphics","
         this.IsListening.SetState(pas["WEBLib.StdCtrls"].TCheckBoxState.cbUnchecked);
         this.IsListening.SetTabOrder(0);
         this.IsListening.SetTop(179);
-        this.IsListening.SetWidth(100);
+        this.IsListening.SetWidth(160);
       } finally {
         this.txtMordu.AfterLoadDFMValues();
         this.WebButton1.AfterLoadDFMValues();

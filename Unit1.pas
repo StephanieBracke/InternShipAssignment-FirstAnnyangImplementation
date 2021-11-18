@@ -30,45 +30,47 @@ implementation
 procedure TForm1.IsListeningClick(Sender: TObject);
 begin
 
-if(IsListening.Checked) then
-begin
-IsListening.Caption := 'Mordu is listening';
-  //Asm Start
-    asm 
-      if (annyang) 
-        {
-          var messages = ['🔊 I am the Lieutenant of Barad-dûr', '🔊 I am the Messenger of Mordor', '🔊 I am the Emissary of the Dark Lord', '🔊 I am the Ambassador of Sauron'];
+      IsListening.Caption := 'Mordu is listening';
+//Asm Start
+        asm 
+          if (annyang){
+            var messages = ['🔊 I am the Lieutenant of Barad-dûr', '🔊 I am the Messenger of Mordor', '🔊 I am the Emissary of the Dark Lord', '🔊 I am the Ambassador of Sauron'];
 
-          var commands = {
-            'Who are you': introduction,
-            'repeat *variable': repeatUser,
-          };
+            var commands = {
+              'Who are you': introduction,
+              'repeat *variable': repeatUser,
+            };
 
-         //Mordu will introduce himself
-            function introduction(){
-              var randomIndex = Math.round(Math.random() * messages.length);
-                alert(messages[randomIndex]);
-            }
+          //Mordu will introduce himself
+              function introduction(){
+                var randomIndex = Math.round(Math.random() * messages.length);
+                  alert(messages[randomIndex]);
+              }
 
           //Repeat what the user says
-            function repeatUser(userSentence){
-              $mod.repeatSentence = userSentence;
-            }
+              function repeatUser(userSentence){
+                $mod.repeatSentence = userSentence;
+              }
 
-      //Add commands
-            annyang.addCommands(commands);
+          //Add commands
+              annyang.addCommands(commands);
 
-      //Start Listening
-            annyang.start();
-    }
-end; 
-end 
-else
+          //Start Listening
+              annyang.start();
+          }
+    end;
+
+if(IsListening.Checked = False) then
+    begin
+  IsListening.Caption := 'Mordu is not listening';
+
 asm 
+//Stop Listening 
 if (annyang){
-  annyang.abort()
-}
+annyang.abort();}
 end;
+end
+
 end;
 
 procedure TForm1.WebButton1Click(Sender: TObject);
@@ -84,4 +86,4 @@ else
 
 end;
 
-end.   
+end.    
