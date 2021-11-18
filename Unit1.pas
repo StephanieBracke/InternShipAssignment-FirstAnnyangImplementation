@@ -56,6 +56,18 @@ begin
           //Add commands
               annyang.addCommands(commands);
 
+          // Tell KITT to use annyang
+              SpeechKITT.annyang();
+
+          // Define a stylesheet for KITT to use
+              SpeechKITT.setStylesheet('//cdnjs.cloudflare.com/ajax/libs/SpeechKITT/1.0.0/themes/flat.css');
+
+          // Render KITT's interface
+              SpeechKITT.vroom();
+
+          // Show Kitt as an extra button
+              SpeechKITT.show();
+
           //Start Listening
               annyang.start();
           }
@@ -68,7 +80,9 @@ if(IsListening.Checked = False) then
 asm 
 //Stop Listening 
 if (annyang){
-annyang.abort();}
+annyang.abort();
+SpeechKITT.hide() 
+}
 end;
 end
 
