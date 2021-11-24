@@ -68,6 +68,12 @@ begin
           // Show Kitt as an extra button
               SpeechKITT.show();
 
+          //Set the text for the toggle button's label.
+          SpeechKITT.setInstructionsText('Try these commands: ');
+
+          //Show the users some commands
+          SpeechKITT.setSampleCommands(['"Who are you?"', '"Repeat!"']);
+
           //Start Listening
               annyang.start();
           }
@@ -77,13 +83,14 @@ if(IsListening.Checked = False) then
     begin
   IsListening.Caption := 'Mordu is not listening';
 
-asm 
-//Stop Listening 
-if (annyang){
-annyang.abort();
-SpeechKITT.hide() 
-}
-end;
+  asm 
+    //Stop Listening 
+      if (annyang){
+        annyang.abort();
+        SpeechKITT.hide() 
+      }
+  end;
+  
 end
 
 end;
