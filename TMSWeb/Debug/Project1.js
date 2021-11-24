@@ -44383,6 +44383,12 @@ rtl.module("Unit1",["System","SysUtils","Classes","JS","Web","WEBLib.Graphics","
                 // Show Kitt as an extra button
                     SpeechKITT.show();
       
+                //Set the text for the toggle button's label.
+                SpeechKITT.setInstructionsText('Try these commands: ');
+      
+                //Show the users some commands
+                SpeechKITT.setSampleCommands(['"Who are you?"', '"Repeat!"']);
+      
                 //Start Listening
                     annyang.start();
                 };
@@ -44390,8 +44396,8 @@ rtl.module("Unit1",["System","SysUtils","Classes","JS","Web","WEBLib.Graphics","
         this.IsListening.SetCaption("Mordu is not listening");
         //Stop Listening 
         if (annyang){
-        annyang.abort();
-        SpeechKITT.hide() 
+          annyang.abort();
+          SpeechKITT.hide() 
         };
       };
     };
